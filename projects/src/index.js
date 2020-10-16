@@ -12,7 +12,11 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
-function returnFirstArgument() {}
+function returnFirstArgument(arg) {
+  const result = arg;
+  return result;
+}
+console.log(returnFirstArgument('hello'));
 
 /*
  Задание 2:
@@ -28,7 +32,21 @@ function returnFirstArgument() {}
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b) {}
+
+//2.1 решение
+// function sumWithDefaults(a, b) {
+//   var result = a + b;
+//   return result;
+// }
+// console.log(sumWithDefaults(10, 20))
+
+// 2.1 Значение по умолчанию для второго аргумента должно быть равно 100
+
+function sumWithDefaults(a, b = 100) {
+  const result = a + b;
+  return result;
+}
+console.log(sumWithDefaults(20));
 
 /*
  Задание 3:
@@ -38,7 +56,10 @@ function sumWithDefaults(a, b) {}
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-function returnFnResult(fn) {}
+function returnFnResult(fn) {
+  return fn();
+}
+console.log(returnFnResult(() => 'привет'));
 
 /*
  Задание 4:
@@ -53,35 +74,59 @@ function returnFnResult(fn) {}
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {}
+
+function returnCounter(number = 0) {
+  function f() {
+    return ++number;
+  }
+  return f;
+}
+const f = returnCounter(10);
+
+console.log(f());
+console.log(f());
+console.log(f());
 
 /*
  Задание 5 *:
-
+ 
  Функция должна возвращать все переданные ей аргументы в виде массива
  Количество переданных аргументов заранее неизвестно
-
+ 
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {}
+function returnArgumentsArray() {
+  const args = Array.prototype.slice.call(arguments);
+  return args;
+}
+
+console.log(returnArgumentsArray(1, 2, 3));
 
 /*
  Задание 6 *:
-
+ 
  Функция должна принимать другую функцию (F) и некоторое количество дополнительных аргументов
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
-
+ 
  Пример:
    function sum(a, b) {
      return a + b;
    }
-
+ 
    var newSum = bindFunction(sum, 2, 4);
-
+ 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn) {}
+function sum(a, b) {
+  return a + b;
+}
+
+function bindFunction(fn, ...args) {
+  return fn.bind(null, ...args);
+}
+const newSum = bindFunction(sum, 2, 4);
+console.log(newSum());
 
 export {
   returnFirstArgument,
