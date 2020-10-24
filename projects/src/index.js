@@ -96,8 +96,7 @@ console.log(f());
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {
-  const args = Array.prototype.slice.call(arguments);
+function returnArgumentsArray(...args) {
   return args;
 }
 
